@@ -42,6 +42,14 @@ metatests.test('Noroutine execute method', async (test) => {
   await noroutine.finalize();
 });
 
+metatests.test(
+  'Noroutine execute method with function as argument',
+  async (test) => {
+    const res1 = await module2.method5((x) => x ** x, 2);
+    test.strictSame(res1, { key: 4 });
+  }
+);
+
 metatests.test('Wait for timeout and reject execution', async (test) => {
   try {
     await module1.method2('value1');

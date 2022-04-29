@@ -3,6 +3,8 @@
 const { Worker } = require('worker_threads');
 const path = require('path');
 
+const { wrapArgs } = require('./lib/arguments');
+
 const STATUS_NOT_INITIALIZED = 0;
 const STATUS_INITIALIZATION = 1;
 const STATUS_INITIALIZED = 2;
@@ -55,7 +57,7 @@ const invoke = async (method, args) => {
       reject(new Error(`Timeout execution for method '${method}'`));
     }, balancer.options.timeout);
     balancer.tasks.set(id, { resolve, reject, timer });
-    balancer.current.postMessage({ id, method, args });
+    balancer.current.postMessage({ id, method, args: wrapArgs(args) });
   });
 };
 
