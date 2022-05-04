@@ -50,6 +50,11 @@ metatests.test(
   }
 );
 
+metatests.test('Noroutine execute non-async method', async (test) => {
+  const res1 = await module2.method6('value6');
+  test.strictSame(res1, { key: 'value6' });
+});
+
 metatests.test('Wait for timeout and reject execution', async (test) => {
   try {
     await module1.method2('value1');
