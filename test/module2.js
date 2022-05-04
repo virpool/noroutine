@@ -10,4 +10,9 @@ const method4 = async (value) => {
   return null;
 };
 
-module.exports = { method3, method4 };
+const method5 = async (fn, value) => {
+  if (value) return { key: fn(value) };
+  return null;
+};
+
+module.exports = { method3, method4, method5 };
